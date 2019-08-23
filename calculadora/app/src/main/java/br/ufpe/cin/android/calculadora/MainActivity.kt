@@ -11,6 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Recover the state of text_calc and text_info.
+        text_calc?.setText(savedInstanceState?.getString("textCalc"))
+        text_info.text = savedInstanceState?.getString("textInfo")
+
         // Set the listener of all the digit numbers buttons
         // to edit the EditText text_cal.
         btn_0.setOnClickListener {
@@ -94,6 +98,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("textInfo", text_info.text.toString())
+        outState.putString("textCalc", text_calc.text.toString())
+        super.onSaveInstanceState(outState)
+    }
+    
 
     //Como usar a função:
     // eval("2+2") == 4.0
